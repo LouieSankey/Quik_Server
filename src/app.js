@@ -4,9 +4,9 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
+const userRouter = require('./user/user_router')
+const pinsRouter = require('./pins/pins_router')
 
-//rename this file and variable to reflect your created table
-const exampleRouter = require('./example/example_router')
 
 const app = express()
 
@@ -18,7 +18,8 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.use('/example_route', exampleRouter)
+app.use('/user_route', userRouter)
+app.use('/pins_route', pinsRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')

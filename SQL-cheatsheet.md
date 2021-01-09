@@ -1,10 +1,21 @@
+
 # postgres CLI
  login into the console. 
 `sudo su - postgres`
 
+`pg_ctl start`
+YOU NEED THIS RUNNING IN BACKGROUND 
+OTHERWISE YOU'LL GET:
+
+<!-- `Error: connect ECONNREFUSED 127.0.0.1:5432
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1134:16) {
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5432` -->
+
 Enter the PostgreSQL console with:
-`pg_ctl start`, 
-or 
 `psql`
 
 Stop Server wtih
@@ -89,10 +100,10 @@ TERMINAL
 `psql -U username -d db_name -f ./sql-script.sql`
 
 edit, copy and past this in:
-`psql -U postgres -d example_database -f ./seeds/seeds.example_table.sql`
+`psql -U postgres -d quik -f ./seeds/seeds.pins.sql`
 `psql -U postgres -d bookmarks_test -f ./seeds/seeds.bookmarks.sql`
 
--f ./migrations/001.do.create-bookmarks-table.sql
+-f ./migrations/001.do.create_user.sql
 
 In a script.sql use keyword BEGIN; and COMMIT; to wrap multiple scripts you want
 treated as one
