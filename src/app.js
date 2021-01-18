@@ -1,14 +1,17 @@
 require('dotenv').config()
-const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const userRouter = require('./user/user_router')
 const pinsRouter = require('./pins/pins_router')
-
+const chatRouter = require('./chat/chat_router')
+const config = require('./config')
+const express = require('express');
 
 const app = express()
+
+
 
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
@@ -20,10 +23,20 @@ app.use(cors())
 
 app.use('/user_route', userRouter)
 app.use('/pins_route', pinsRouter)
+app.use('/chat_route', chatRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')
  })
+
+
+// io.on('connection', function(socket){
+//     socket.on('chat message', function(msg){
+//     io.emit('chat message', msg);
+//     });
+// });
+
+
 
 app.use(function errorHandler(error, req, res, next) {
     let response

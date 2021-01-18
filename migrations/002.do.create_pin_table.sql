@@ -9,6 +9,11 @@ CREATE TABLE pin_table (
     age TEXT NOT NULL,
     bio TEXT NOT NULL,
     photo_url TEXT NOT NULL,
+    likes_recieved TEXT[],
+    likes_sent TEXT[],
+    date_request_recieved TEXT[],
+    date_request_sent TEXT[],
+    date_reveal_text TEXT NOT NULL,
     date_published TIMESTAMPTZ DEFAULT now() NOT NULL
 );
 
