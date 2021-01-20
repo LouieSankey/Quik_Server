@@ -11,8 +11,6 @@ const express = require('express');
 
 const app = express()
 
-
-
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
@@ -28,14 +26,6 @@ app.use('/chat_route', chatRouter)
 app.get('/', (req, res) => {
     res.send('Hello, world!')
  })
-
-
-// io.on('connection', function(socket){
-//     socket.on('chat message', function(msg){
-//     io.emit('chat message', msg);
-//     });
-// });
-
 
 
 app.use(function errorHandler(error, req, res, next) {

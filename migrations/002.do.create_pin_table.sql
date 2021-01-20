@@ -13,7 +13,8 @@ CREATE TABLE pin_table (
     likes_sent TEXT[],
     date_request_recieved TEXT[],
     date_request_sent TEXT[],
-    date_reveal_text TEXT NOT NULL,
+    date_location TEXT NOT NULL,
+    date_location_category TEXT NOT NULL,
     date_published TIMESTAMPTZ DEFAULT now() NOT NULL
 );
 

@@ -1,10 +1,6 @@
 const express = require('express')
-// const xss = require('xss')
-// const path = require('path')
 const ChatService = require('./chat_service')
 const chatRouter = express.Router()
-// const jsonParser = express.json()
-
 
 chatRouter
   .route('/room_id/:room_id')

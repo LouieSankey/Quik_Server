@@ -25,12 +25,12 @@ userRouter
     const newUser = { email, username, birthday, password, seeking }
 
     for (const [key, value] of Object.entries(newUser)) {
-             if (value == null) {
-               return res.status(400).json({
-                 error: { message: `Missing '${key}' in request body` }
-               })
-             }
-           }
+      if (value == null) {
+        return res.status(400).json({
+          error: { message: `Missing '${key}' in request body` }
+        })
+      }
+    }
 
     UserService.insertUser(
       req.app.get('db'),
@@ -47,7 +47,7 @@ userRouter
   })
 
 
-  userRouter
+userRouter
   .route('/email/:email')
   .all((req, res, next) => {
 
@@ -61,8 +61,8 @@ userRouter
             error: { message: `user doesn't exist` }
           })
         }
-        res.user = user 
-        next() 
+        res.user = user
+        next()
       })
       .catch(next)
   })
@@ -102,63 +102,63 @@ userRouter
 userRouter
   .route('/:user_id')
   .all((req, res, next) => {
-         UserService.getById(
-           req.app.get('db'),
-           req.params.user_id
-         )
-           .then(user => {
-             if (!user) {
-               return res.status(404).json({
-                 error: { message: `user doesn't exist` }
-               })
-             }
-             res.user = user // save the user for the next middleware
-             next() // don't forget to call next so the next middleware happens!
-           })
-           .catch(next)
-       })
+    UserService.getById(
+      req.app.get('db'),
+      req.params.user_id
+    )
+      .then(user => {
+        if (!user) {
+          return res.status(404).json({
+            error: { message: `user doesn't exist` }
+          })
+        }
+        res.user = user 
+        next()
+      })
+      .catch(next)
+  })
   .get((req, res, next) => {
     res.json({
-                   id: res.user.id,
-                   username: xss(res.user.username), 
-                   email: xss(res.user.email), 
-                   date_published: res.user.date_published,
-                 })
+      id: res.user.id,
+      username: xss(res.user.username),
+      email: xss(res.user.email),
+      date_published: res.user.date_published,
+    })
   })
   .delete((req, res, next) => {
     UserService.deleteUser(
-             req.app.get('db'),
-             req.params.user_id
-           )
-             .then(() => {
-               res.status(204).end()
-             })
-             .catch(next)
-       })
+      req.app.get('db'),
+      req.params.user_id
+    )
+      .then(() => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
 
-       .patch(jsonParser, (req, res, next) => {
-           const { email, username, password, seeking  } = req.body
-           const userToUpdate = { email, username, password, seeking  }
+  .patch(jsonParser, (req, res, next) => {
+    const { email, username, password, seeking } = req.body
+    const userToUpdate = { email, username, password, seeking }
 
-           const numberOfValues = Object.values(userToUpdate).filter(Boolean).length
-             if (numberOfValues === 0) {
-               return res.status(400).json({
-                 error: {
-                   message: `Request body must contain a required field'`
-                 }
-               })
-             }
+    const numberOfValues = Object.values(userToUpdate).filter(Boolean).length
+    if (numberOfValues === 0) {
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain a required field'`
+        }
+      })
+    }
 
-           UserService.updateUser(
-                 req.app.get('db'),
-                 req.params.user_id,
-                 userToUpdate
-               )
-                 .then(numRowsAffected => {
-                   res.status(204).end()
-                 })
-                 .catch(next)
+    UserService.updateUser(
+      req.app.get('db'),
+      req.params.user_id,
+      userToUpdate
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
 
-         })
+  })
 
 module.exports = userRouter
