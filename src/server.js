@@ -4,14 +4,17 @@ const knex = require('knex')
 // var https = require('https');
 // var fs = require('fs');
 
-const { Pool } = require('pg');
+// const { Pool } = require('pg');
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
+
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
 
 const { PORT, DATABASE_URL } = require('./config')
 
