@@ -15,18 +15,15 @@ const db = knex({
 
 app.set('db', db)
 
-var server = https.createServer({
-  key: fs.readFileSync('../key.pem'),
-  cert: fs.readFileSync('../cert.pem'),
-  // ca: fs.readFileSync(/*full path to your intermediate cert*/),
-  requestCert: true,
-  rejectUnauthorized: false
-},app);
+// var server = https.createServer({
+//   key: fs.readFileSync('../key.pem'),
+//   cert: fs.readFileSync('../cert.pem'),
+//   // ca: fs.readFileSync(/*full path to your intermediate cert*/),
+//   requestCert: true,
+//   rejectUnauthorized: false
+// },app);
 
-// var server = require('http').Server(app);
-
-
-
+var server = require('http').Server(app);
 
 var io = require('socket.io')(server, {
   cors: {
@@ -38,7 +35,7 @@ var io = require('socket.io')(server, {
 
 
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
 })
 
