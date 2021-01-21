@@ -1,8 +1,17 @@
 const ChatService = require('./chat/chat_service')
 const app = require('./app')
 const knex = require('knex')
-var https = require('https');
-var fs = require('fs');
+// var https = require('https');
+// var fs = require('fs');
+
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 const { PORT, DATABASE_URL } = require('./config')
 
