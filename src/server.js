@@ -25,7 +25,7 @@ var server = require('http').Server(app);
 
 var io = require('socket.io')(server, {
   cors: {
-    origin: "https://quik.vercel.app/quik",
+    origin: "https://quik.vercel.app",
     methods: ["GET", "POST"],
     credentials: true
   }
