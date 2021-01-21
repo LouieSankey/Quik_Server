@@ -4,8 +4,6 @@ const knex = require('knex')
 var https = require('https');
 var fs = require('fs');
 
-
-
 const { PORT, DATABASE_URL } = require('./config')
 
 const db = knex({
@@ -35,7 +33,7 @@ var io = require('socket.io')(server, {
 
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
 })
 
