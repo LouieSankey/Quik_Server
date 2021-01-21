@@ -1,23 +1,21 @@
 const ChatService = require('./chat/chat_service')
 const app = require('./app')
 const knex = require('knex')
-const https = require('https')
-const fs = requre('fs')
 
 const { PORT, DATABASE_URL } = require('./config')
 
 const db = knex({
   client: 'pg',
-  connection: DATABASE_URL
-  
+  connection: DATABASE_URL,
 })
 
 app.set('db', db)
 
+//origin here will have to be changed for Heroku, I think
 var server = require('http').Server(app);
 var io = require('socket.io')(server, {
   cors: {
-    origin: "https://quik.vercel.app",
+    origin: "https://quik.vercel.app/quik",
     methods: ["GET", "POST"],
     credentials: true
   }
