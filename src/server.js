@@ -13,7 +13,7 @@ const db = knex({
 app.set('db', db)
 
 //origin here will have to be changed for Heroku, I think
-var server = require('https').Server(app);
+var server = require('http').Server(app);
 var io = require('socket.io')(server, {
   cors: {
     origin: "https://quik.vercel.app",
