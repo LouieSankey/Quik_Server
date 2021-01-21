@@ -1,6 +1,10 @@
 const ChatService = require('./chat/chat_service')
 const app = require('./app')
 const knex = require('knex')
+var https = require('https');
+var fs = require('fs');
+
+
 
 const { PORT, DATABASE_URL } = require('./config')
 
@@ -11,14 +15,30 @@ const db = knex({
 
 app.set('db', db)
 
-//origin here will have to be changed for Heroku, I think
+// var server = https.createServer({
+//   key: fs.readFileSync(/*full path to your key*/),
+//   cert: fs.readFileSync(/*full path to your cert*/),
+//   ca: fs.readFileSync(/*full path to your intermediate cert*/),
+//   requestCert: true,
+//   rejectUnauthorized: false
+// },app);
+
 var server = require('http').Server(app);
+
+
+
+
 var io = require('socket.io')(server, {
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials: true
   }
+});
+
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
 });
 
 server.listen(PORT, () => {
