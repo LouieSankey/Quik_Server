@@ -1,20 +1,11 @@
 const ChatService = require('./chat/chat_service')
 const app = require('./app')
 const knex = require('knex')
-// var https = require('https');
-// var fs = require('fs');
+const config = require('./config')
 
-// const { Pool } = require('pg');
-
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
-
+//this line is a temporary fix to 'self signed cert' error
+//it should be replaced with a valid ssl certificate
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-
 
 const { PORT, DATABASE_URL } = require('./config')
 
@@ -25,19 +16,13 @@ const db = knex({
 
 app.set('db', db)
 
-// var server = https.createServer({
-//   key: fs.readFileSync('../key.pem'),
-//   cert: fs.readFileSync('../cert.pem'),
-//   // ca: fs.readFileSync(/*full path to your intermediate cert*/),
-//   requestCert: true,
-//   rejectUnauthorized: false
-// },app);
-
 var server = require('http').Server(app);
+
+const origin = config.NODE_ENV === 'development' ? "http://localhost:3000" : "https://quik.vercel.app"
 
 var io = require('socket.io')(server, {
   cors: {
-    origin: "https://quik.vercel.app",
+    origin: origin,
     methods: ["GET", "POST"],
     credentials: true
   }
