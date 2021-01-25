@@ -23,5 +23,6 @@ chatRouter
   .get((req, res, next) => {
    res.json(res.messages)
 })
+//insert into db happens through socket.io in server.js 
 
 module.exports = chatRouter;

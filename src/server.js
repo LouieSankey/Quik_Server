@@ -4,7 +4,7 @@ const knex = require('knex')
 const config = require('./config')
 
 //this line is a temporary fix to 'self signed cert' error
-//it should be replaced with a valid ssl certificate
+//it should be replaced with a valid ssl certificate when securing the app
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 const { PORT, DATABASE_URL } = require('./config')

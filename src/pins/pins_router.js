@@ -62,15 +62,11 @@ pinRouter
     const { user_id } = req.body
     const params = { user_id }
 
-    console.log(user_id)
-
-
     PinService.getConnections(
       req.app.get('db'),
       params
     )
       .then(pin => {
-        console.log("ppin " + pin)
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${pin.id}`))
