@@ -103,7 +103,7 @@ edit, copy and past this in:
 `psql -U postgres -d quik -f ./seeds/seeds.pins.sql`
 `psql -U postgres -d bookmarks_test -f ./seeds/seeds.bookmarks.sql`
 
-psql -U postgres -d quik -f ./migrations/002.do.create_pin_table.sql
+psql -U postgres -d quik -f ./migrations/002.undo.create_pin_table.sql
 
 In a script.sql use keyword BEGIN; and COMMIT; to wrap multiple scripts you want
 treated as one
