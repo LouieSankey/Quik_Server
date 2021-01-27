@@ -31,7 +31,6 @@ var io = require('socket.io')(server, {
 
 
 server.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`)
 })
 
 io.on('connection', function (socket) {
@@ -44,7 +43,7 @@ io.on('connection', function (socket) {
       'username': msgInfo.username,
       'msg': msgInfo.msg
     }
-    ChatService.insertMessage(db, message).catch(error => console.log(error))
+    ChatService.insertMessage(db, message).catch(error => console.error(error))
   })
 
   socket.on('request', function (params) {

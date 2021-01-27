@@ -76,7 +76,7 @@ userRouter
 
       const user = res.user
       jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
-        if (err) { console.log(err) }
+        if (err) { console.error(err) }
         res.json({
           id: res.user.id,
           email: res.user.email,
