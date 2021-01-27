@@ -1,7 +1,7 @@
 const express = require('express')
 const xss = require('xss')
 const path = require('path')
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 
 const UserService = require('./user_service')
 
@@ -68,9 +68,9 @@ userRouter
   })
   .post(jsonParser, (req, res, next) => {
 
-    const { body } = req;
-    const { email } = body;
-    const { password } = body;
+    const { body } = req
+    const { email } = body
+    const { password } = body
 
     if (email === res.user.email && password === res.user.password) {
 
@@ -87,7 +87,7 @@ userRouter
           token: token
         })
 
-      });
+      })
 
 
     } else {

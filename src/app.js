@@ -7,13 +7,13 @@ const userRouter = require('./user/user_router')
 const pinsRouter = require('./pins/pins_router')
 const chatRouter = require('./chat/chat_router')
 const config = require('./config')
-const express = require('express');
+const express = require('express')
 
 const app = express()
 
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
-  : 'common';
+  : 'common'
 
 app.use(morgan(morganOption))
 app.use(helmet())

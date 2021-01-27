@@ -2,8 +2,6 @@ const ChatService = {
 
     insertMessage(knex, message) {
 
-        console.log(message)
-
         return knex
             .insert(message)
             .into('chat_table')

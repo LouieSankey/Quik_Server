@@ -94,7 +94,7 @@ describe('Pins Endpoints', function () {
         .send(newPin)
         .expect(201)
         .then(res => {
-          expect(res.body).to.be.an('object');
+          expect(res.body).to.be.an('object')
           expect(res.body.user_name).to.equal(newPin.user_name)
           expect(res.body.user_id).to.equal(newPin.user_id)
         })

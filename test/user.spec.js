@@ -118,7 +118,7 @@ describe('Users Endpoints', function () {
         .send(newUser)
         .expect(201)
         .then(res => {
-          expect(res.body).to.be.an('object');
+          expect(res.body).to.be.an('object')
           expect(res.body.username).to.equal(newUser.username)
         })
 
