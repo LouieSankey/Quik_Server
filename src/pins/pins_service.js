@@ -13,9 +13,10 @@ const PinService = {
     // add 'where date > today's date' here
     getByUserId(knex, user_id) {
         let todaysDate = new Date();
-        let yesterdaysDate = todaysDate.setDate(todaysDate.getDate() - 1).toISOString()
+        let yesterdaysDate = todaysDate.setDate(todaysDate.getDate() - 1)
+        let formattedDate = new Date(yesterdaysDate).toISOString()
 
-        return knex.from('pin_table').select('*').where('user_id', user_id).where('pin_date', '>', yesterdaysDate)
+        return knex.from('pin_table').select('*').where('user_id', user_id).where('pin_date', '>', formattedDate)
     },
 
     //will also need to sort male female - or have it inclusive?
